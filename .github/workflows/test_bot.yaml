@@ -12,6 +12,8 @@ concurrency:
 # Daily job to run the simple forecast bot
 jobs:
   forecast_job:
+    # [Income Ops draft] Kill switch: job only runs when repo variable TEST_BOT_ENABLED == 'true'.
+    if: vars.TEST_BOT_ENABLED == 'true'
     runs-on: ubuntu-latest # determines the machine that will run the job - keep as is
     steps: # sets up the steps that will be run in order
       # setup repository with all necessary dependencies - keep as is
@@ -49,3 +51,4 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ASKNEWS_CLIENT_ID: ${{ secrets.ASKNEWS_CLIENT_ID }}
           ASKNEWS_SECRET: ${{ secrets.ASKNEWS_SECRET }}
+          ASKNEWS_API_KEY: ${{ secrets.ASKNEWS_API_KEY }}
